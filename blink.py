@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import time, threading
+import sys, time, threading
 from dmxSender import *
 
 CHANNEL = 1
@@ -9,6 +9,8 @@ dmx.start()
 
 while True: 
   dmx.setChannel(CHANNEL, 255)
+  sys.stdout.write("\rBLINK - (Type ^C to abort)")
   time.sleep(1)
   dmx.setChannel(CHANNEL, 0)
+  sys.stdout.write("\rblink - (Type ^C to abort)")
   time.sleep(2)
