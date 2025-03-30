@@ -1,10 +1,10 @@
 # requirements
 #
+# python=3
 # pyftdi
 
-import time
+import time, threading
 import pyftdi.serialext
-import threading
 
 class dmxSender:
 
