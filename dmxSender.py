@@ -20,27 +20,27 @@ class dmxSender:
     self.dmxData = [bytes([0])] * 513
         
   def setChannel(self, chan, intensity):
-        self.dmxData[chan] = bytes([intensity])
+    self.dmxData[chan] = bytes([intensity])
         
   def blackout(self):
-        for i in range(1, 512, 1):
-            self.dmxData[i] = bytes([0])
+    for i in range(1, 512, 1):
+      self.dmxData[i] = bytes([0])
 
   def whiteout(self):
-        for i in range(1, 512, 1):
-            self.dmxData[i] = bytes([255])
+    for i in range(1, 512, 1):
+      self.dmxData[i] = bytes([255])
         
   def render(self):
-        sdata = b''.join(self.dmxData)
-        self.serial.send_break(duration=0.001)
-        self.serial.write(sdata)
+    sdata = b''.join(self.dmxData)
+    self.serial.send_break(duration=0.001)
+    self.serial.write(sdata)
 
   def render_thread(self):
-        while True:
-            self.render()
-            time.sleep(0.005)
+    while True:
+      self.render()
+      time.sleep(0.005)
   
   def start(self):
-        self.dmx_thread = threading.Thread(target=self.render_thread)
-        self.dmx_thread.daemon = True
-        self.dmx_thread.start()
+    self.dmx_thread = threading.Thread(target=self.render_thread)
+    self.dmx_thread.daemon = True
+    self.dmx_thread.start()
